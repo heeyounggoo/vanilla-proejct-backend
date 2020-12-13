@@ -42,4 +42,11 @@ const annualSchema = new mongoose.Schema({
   deposit: [savingDepositSchema]
 })
 
+annualSchema.statics.create = function (payload) {
+  const annualPlan = new this(payload)
+  return annualPlan.save()
+}
+
+annualSchema.statics.updateAnnual = function() {}
+
 module.exports = mongoose.model('Annual', annualSchema)

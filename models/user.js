@@ -10,4 +10,17 @@ const userSchema = new mongoose.Schema({
   age: { type: String }
 })
 
+userSchema.statics.create = function (payload) {
+  const user = new this(payload)
+  return user.save()
+}
+
+userSchema.statics.findUser = function (userId) {
+  return this.findOne({ userId: userId })
+}
+
+userSchema.statics.updateUser = function (userId, payload) {
+  return this.updateOne({ userId: userId }, payload)
+}
+
 module.exports = mongoose.model('User', userSchema)
